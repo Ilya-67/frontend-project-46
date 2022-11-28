@@ -18,7 +18,7 @@ const genDiff = (file1, file2) => {
 
   const resultFile = JSON.stringify(getIntersectionObj(jointKeys, obj1, obj2));
 
-  console.log(resultFile
+  return (resultFile
     .replace('"', '\n ')
     .replaceAll('"', '')
     .replaceAll(',', '\n ')
