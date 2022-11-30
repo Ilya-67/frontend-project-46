@@ -26,15 +26,14 @@ jobs:
       with: 
         node-version: ${{ matrix.node-version }}
         cashe: "npm"
-    - name: npm install
-      run: make install
-    - name: Run linter
-      run: make lint
+    
+    - run: make install
+    - run: make lint  
+    - run: make test
     - name: Test & publish code coverage
-      run: make test
       uses: paambaat1/codeclimate-action@v3.0.0
       env:
-         CC_TEST_REPORTER_ID: ${{ secret.ILYA67COVERAGEKEY }}
-          with:
-            coverageCommand: make test-coverage
-            debag: true
+        CC_TEST_REPORTER_ID: ${{ secret.ILYA67COVERAGEKEY }}
+      with: 
+        coverageCommand: make test --coverage
+        debug: true
