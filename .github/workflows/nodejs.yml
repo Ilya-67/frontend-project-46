@@ -17,11 +17,11 @@ jobs:
       node-version: [19.x]
   steps:
     - uses: 
-        actions/checkout@v2
+        actions/core
     - name: 
         Use Node.js ${{ matrix.node-version }}
       uses: 
-        actions/setup-node@v2
+        actions/core
       with: 
         node-version: ${{ matrix.node-version }}
         cashe: "npm"
