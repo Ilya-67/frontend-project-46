@@ -5,26 +5,33 @@ on:
   
 jobs:
  build:
-  run-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: 19.x
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      node-version: 19.x
     steps:
-        - uses: actions/checkout@v2
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v1
-          with: node-version: ${{ matrix.node-version }}
+        - uses: 
+            actions/checkout@v2
+        - name: 
+            Use Node.js ${{ matrix.node-version }}
+          uses: 
+            actions/setup-node@v1
+          with: 
+            node-version: 19.x
         - name: npm install
           run:  |
               make install
           env:
              CI: true
-         - name: Run linter
-           run:  |
+        - name: 
+              Run linter
+          run:  |
              make lint
-         - name: Test & publish code coverage
-           uses: paambaat1/codeclimate-action@v3.0.0
-           env:
+        - name: 
+            Test & publish code coverage
+          uses: 
+            paambaat1/codeclimate-action@v3.0.0
+          env:
             CC_TEST_REPORTER_ID: ${{ secret.ILYA67COVERAGEKEY }}
           with:
             coverageCommand: make test-coverage
