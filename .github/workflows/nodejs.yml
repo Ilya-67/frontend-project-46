@@ -23,7 +23,7 @@ jobs:
            run:  |
              make lint
          - name: Test & publish code coverage
-           uses: paambaat1/codeclimate-action@v2.7.4
+           uses: paambaat1/codeclimate-action@v3.0.0
            env:
             CC_TEST_REPORTER_ID: ${{ secret.ILYA67COVERAGEKEY }}
           with:
