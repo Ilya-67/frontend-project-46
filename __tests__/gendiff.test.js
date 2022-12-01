@@ -26,12 +26,18 @@ const result2 = `{
 
 test('gendiff JSON', () => {
   expect(genDiff(file1, file2)).toBe(result1);
+});
+
+test('gendiff JSON', () => {
   expect(genDiff(file1, file3)).toBe(result2);
 });
 
+
 test('gendiff YAML', () => {
   expect(genDiff(file4, file5)).toBe(result1);
-  expect(genDiff(file4, file6)).toBe(result2);
 });
 
+test('gendiff YAML', () => {
+  expect(genDiff(file4, file6)).toBe(result2);
+});
 
