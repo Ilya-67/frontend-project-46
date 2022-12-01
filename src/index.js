@@ -1,13 +1,11 @@
-import path from 'path';
-import fs from 'fs';
 import _ from 'lodash';
-import getIntersectionObj from './util.js';
+import getIntersectionObj from './utils.js';
+import getParseFile from './parse.js';
+import { dump } from 'js-yaml';
 
 const genDiff = (file1, file2) => {
-  const filepath1 = path.resolve(file1);
-  const filepath2 = path.resolve(file2);
-  const obj1 = JSON.parse(fs.readFileSync(filepath1, 'latin1'));
-  const obj2 = JSON.parse(fs.readFileSync(filepath2, 'latin1'));
+  const obj1 = getParseFile(file1);
+  const obj2 = getParseFile(file2);  
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
 
@@ -16,13 +14,9 @@ const genDiff = (file1, file2) => {
   const diffKeys2 = _.difference(keys2, keys1);
   const jointKeys = _.sortBy(_.concat(diffKeys1, intersectionKeys, diffKeys2));
 
-  const resultFile = JSON.stringify(getIntersectionObj(jointKeys, obj1, obj2));
-
-  return (resultFile
-    .replace('"', '\n ')
-    .replaceAll('"', '')
-    .replaceAll(',', '\n ')
-    .replace('}', '\n}'));
+  const result = dump(getIntersectionObj(jointKeys, obj1, obj2));
+  console.log(`{\n${result.replaceAll("'", '').trimEnd()}\n}`);
+  return (`{\n${result.replaceAll("'", '').trimEnd()}\n}`);
 };
 
 export default genDiff;
