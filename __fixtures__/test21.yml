@@ -2,3 +2,6 @@ key: value
 key2: 10
 key5: value3
 key4: true
+key7: {
+    foo: bar
+  }

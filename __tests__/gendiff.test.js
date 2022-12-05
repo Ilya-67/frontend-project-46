@@ -10,18 +10,25 @@ const file6 = '__fixtures__/test31.yml';
 
 const result1 = `{
     key: value
-  - key2: 20
-  + key2: 10
-  - key3: value3
-  - key4: false
-  + key4: true
-  + key5: value3
+    \b\b- key2: 20
+    \b\b+ key2: 10
+    \b\b- key3: value3
+    \b\b- key4: false
+    \b\b+ key4: true
+    \b\b+ key5: value3
+    key7: {
+        foo: bar
+    }
 }`;
+
 const result2 = `{
-  - key: value
-  - key2: 20
-  - key3: value3
-  - key4: false
+    \b\b- key: value
+    \b\b- key2: 20
+    \b\b- key3: value3
+    \b\b- key4: false
+    \b\b- key7: {
+        foo: bar
+    }
 }`;
 
 test('gendiff JSON', () => {

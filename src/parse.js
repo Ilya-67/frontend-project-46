@@ -13,5 +13,4 @@ const getParseFile = (file) => {
   }
 }
 
-
 export default getParseFile;
