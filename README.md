@@ -7,3 +7,5 @@
 <a href="https://asciinema.org/a/Va2GJdCoDnq58talb62r2XAdO" target="_blank"><img src="https://asciinema.org/a/Va2GJdCoDnq58talb62r2XAdO.svg" /></a>
 <p>An example of how the program works when comparing two YML files. The example introduces relative and absolute paths.</p>
 <a href="https://asciinema.org/a/YljUJ0XIjr3cCQjMQKck1JmMI" target="_blank"><img src="https://asciinema.org/a/YljUJ0XIjr3cCQjMQKck1JmMI.svg" /></a>
+<p>An example of how the program works when comparing with JSON and YAML layered files.</p>
+<a href="https://asciinema.org/a/7rHtoQthJxOqBIGjCGJmfxsne" target="_blank"><img src="https://asciinema.org/a/7rHtoQthJxOqBIGjCGJmfxsne.svg" /></a>

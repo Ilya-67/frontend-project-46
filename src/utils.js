@@ -3,13 +3,12 @@ import _ from 'lodash';
 export const getIntersectionObj = (keys, obj1, obj2) => {
   const newObj = {};
   keys.map((key) => {
-    if (typeof(obj1[key]) === "object" && typeof(obj2[key]) === "object") {
+    if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
       const childrenObj1 = obj1[key];
       const childrenObj2 = obj2[key];
       const childrenKey = getJoinKey(childrenObj1, childrenObj2);
       newObj[`${key}`] = getIntersectionObj(childrenKey, childrenObj1, childrenObj2);
-      const result = JSON.stringify(newObj); 
-      return result; 
+      return JSON.stringify(newObj);  
     }
     if (obj1[key] === obj2[key]) {
       newObj[`${key}`] = obj1[key];

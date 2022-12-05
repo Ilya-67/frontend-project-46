@@ -1,27 +1,25 @@
-import { dump } from 'js-yaml';
-
 const getFormatResult = (str) => {
-  const result = str.replaceAll('"', '').replaceAll(':', ': ');
-  let k = 0;
+  const newString = str.replaceAll('"', '').replaceAll(':', ': ');
+  let countSpaces = 0;
   const space = ' ';
-  const a = [];
-  for (let item of result) {
+  const simbolsOfString = [];
+  for (let item of newString) {
     if (item === '{') {
-      k += 4;
-      item = `{\n${space.repeat(k)}`;
+      countSpaces += 4;
+      item = `{\n${space.repeat(countSpaces)}`;
     } if (item === ',') {
-        item = `\n${space.repeat(k)}`;
+        item = `\n${space.repeat(countSpaces)}`;
     } if (item === '}') {
-        k -= 4;
-        item = `\n${space.repeat(k)}}`;
+        countSpaces -= 4;
+        item = `\n${space.repeat(countSpaces)}}`;
     } if (item === '+' || item === '-') {
         item = `\b\b${item}`;
     }
-    a.push(item);    
+    simbolsOfString.push(item);    
   }
-  const b = a.join().replaceAll(',', '');
-  console.log(b);
-  return b;
+  const result = simbolsOfString.join().replaceAll(',', '');
+  console.log(result);
+  return result;
 };
 
 export default getFormatResult;
