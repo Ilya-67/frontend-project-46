@@ -9,6 +9,16 @@ const getUpdateValue = (value) => {
   return value;
 };
 
+const setFormatResultItem = (notchValue, insertValue, propertyObj) => {
+  if (notchValue === undefined) {
+        return `Property '${propertyObj}' was added with value: ${insertValue}`;
+      } if (insertValue === undefined) {
+        return`Property '${propertyObj}' was removed`;
+      } if (notchValue !== undefined && insertValue !== undefined) {
+        return`Property '${propertyObj}' was updated. From ${notchValue} to ${insertValue}`;
+      }
+};
+
 const setFormatingObj = (newObj, strPath) => {
   const workingArray = Object.entries(newObj);
   const resultArray = [];
@@ -17,20 +27,11 @@ const setFormatingObj = (newObj, strPath) => {
     const key = workingArray[i][0];
     const value = workingArray[i][1];
     if (key.startsWith('-')) {
-      let result;
       const propertyObj = `${strPath}${key.slice(2)}`;
       const notchValue = getUpdateValue(value);
       const insertValue = getUpdateValue(workingArray[i + 1][1]);
-      if (notchValue === undefined) {
-        result = `Property '${propertyObj}' was added with value: ${insertValue}`;
-        resultArray.push(result);
-      } if (insertValue === undefined) {
-        result = `Property '${propertyObj}' was removed`;
-        resultArray.push(result);
-      } if (notchValue !== undefined && insertValue !== undefined) {
-        result = `Property '${propertyObj}' was updated. From ${notchValue} to ${insertValue}`;
-        resultArray.push(result);
-      }
+      const result = setFormatResultItem(notchValue, insertValue, propertyObj);
+      resultArray.push(result);
       i += 1;
     } if (_.isObject(value)) {
         resultArray.push(setFormatingObj(value, `${strPath}${key}.`));
