@@ -31,12 +31,9 @@ const setFormatingObj = (newObj, strPath) => {
         result = `Property '${propertyObj}' was updated. From ${notchValue} to ${insertValue}`;
         resultArray.push(result);
       }
-      i += 2;
-      continue;
+      i += 1;
     } if (_.isObject(value)) {
         resultArray.push(setFormatingObj(value, `${strPath}${key}.`));
-        i += 1;
-      continue
     } 
     i += 1;
   } 
