@@ -9,6 +9,7 @@ const file5 = '__fixtures__/test21.yml';
 const file6 = '__fixtures__/test31.yml';
 const style1 = { format: 'stylish' };
 const style2 = { format: 'plain' };
+const style3 = { format: 'json'};
 
 const result1 = `{
     key: value
@@ -50,6 +51,8 @@ Property 'key7.baz' was updated. From 'value1' to 'value2'
 Property 'key7.key1' was added with value: [complex value]
 Property 'key7.key2' was removed`;
 
+const result4 = `{"key":"value","- key2":20,"+ key2":10,"- key3":"value3","- key4":false,"+ key4":true,"+ key5":"value3","key7":{"- baz":"value1","+ baz":"value2","foo":"bar","+ key1":{"key12":"value3"},"- key2":"value4"}}`;
+
 test('gendiff JSON', () => {
   expect(genDiff(file1, file2, style1)).toBe(result1);
 });
@@ -68,4 +71,8 @@ test('gendiff YAML', () => {
 
 test('gendiff plain', () => {
   expect(genDiff(file4, file5, style2)).toBe(result3);
+});
+
+test('gendiff json', () => {
+  expect(genDiff(file1, file2, style3)).toBe(result4);
 });
