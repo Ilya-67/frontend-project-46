@@ -1,4 +1,5 @@
-const getFormatResult = (str) => {
+const setStylishFormat = (obj) => {
+  const str = JSON.stringify(obj);
   const newString = str.replaceAll('"', '').replaceAll(':', ': ');
   let countSpaces = 0;
   const space = ' ';
@@ -22,4 +23,4 @@ const getFormatResult = (str) => {
   return result;
 };
 
-export default getFormatResult;
+export default setStylishFormat;

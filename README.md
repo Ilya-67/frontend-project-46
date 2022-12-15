@@ -9,3 +9,5 @@
 <a href="https://asciinema.org/a/YljUJ0XIjr3cCQjMQKck1JmMI" target="_blank"><img src="https://asciinema.org/a/YljUJ0XIjr3cCQjMQKck1JmMI.svg" /></a>
 <p>An example of how the program works when comparing with JSON and YAML layered files.</p>
 <a href="https://asciinema.org/a/7rHtoQthJxOqBIGjCGJmfxsne" target="_blank"><img src="https://asciinema.org/a/7rHtoQthJxOqBIGjCGJmfxsne.svg" /></a>
+<p>An example of working in two variants of formatting the results: 'stylish' and 'plain'.</p>
+<a href="https://asciinema.org/a/tMY2m0wcj2I4LVJ0WkmisGcr7" target="_blank"><img src="https://asciinema.org/a/tMY2m0wcj2I4LVJ0WkmisGcr7.svg" /></a>

@@ -3,5 +3,7 @@ key2: 20
 key3: value3
 key4: false
 key7: {
-    foo: bar
+    foo: bar,
+    baz: value1,
+    key2: value4
 }
