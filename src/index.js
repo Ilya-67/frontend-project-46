@@ -1,4 +1,3 @@
-//import _ from 'lodash';
 import { getIntersectionObj, getJoinKey } from './utils.js';
 import getParseFile from './parse.js';
 import doFormattingResult from './formatters/index.js';
