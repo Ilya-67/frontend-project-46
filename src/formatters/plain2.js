@@ -21,24 +21,29 @@ const setFormatResultItem = (notchValue, insertValue, propertyObj) => {
 
 const setFormatingObj = (newObj, strPath) => {
   const workingArray = Object.entries(newObj);
-  const resultArray = workingArray.flatMap((item, index) => {
-    const key = item[0];
-    const value = item[1];
+  const resultArray = [];
+  let i = 0;
+  while (i < workingArray.length) { 
+    const key = workingArray[i][0];
+    const value = workingArray[i][1];
     if (key.startsWith('-')) {
       const propertyObj = `${strPath}${key.slice(2)}`;
       const notchValue = getUpdateValue(value);
-      const insertValue = getUpdateValue(workingArray[index + 1][1]);
-      return setFormatResultItem(notchValue, insertValue, propertyObj);
+      const insertValue = getUpdateValue(workingArray[i + 1][1]);
+      const result = setFormatResultItem(notchValue, insertValue, propertyObj);
+      resultArray.push(result);
+      //i += 1;
     } if (_.isObject(value)) {
-      return (setFormatingObj(value, `${strPath}${key}.`));
+      resultArray.push(setFormatingObj(value, `${strPath}${key}.`));
     } 
-  });  
-  return _.compact(resultArray);
+    i += 1;
+  } 
+  return _.flatten(resultArray);
 };
 
 const setPlainFormat = (newObj) => {
   const resultArray = setFormatingObj(newObj, '');
-  const resultString = resultArray.join('\n');
+  const resultString = resultArray.join('\n').replaceAll('"', '');
   console.log(resultString);
   return resultString
 }
