@@ -1,0 +1,7 @@
+Property 'key2' was updated. From 20 to 10
+Property 'key3' was removed
+Property 'key4' was updated. From false to true
+Property 'key5' was added with value: 'value3'
+Property 'key7.baz' was updated. From 'value1' to 'value2'
+Property 'key7.key1' was added with value: [complex value]
+Property 'key7.key2' was removed

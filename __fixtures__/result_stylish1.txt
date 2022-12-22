@@ -1,0 +1,18 @@
+{
+    key: value
+  - key2: 20
+  + key2: 10
+  - key3: value3
+  - key4: false
+  + key4: true
+  + key5: value3
+    key7: {
+      - baz: value1
+      + baz: value2
+        foo: bar
+      + key1: {
+            key12: value3
+        }
+      - key2: value4
+    }
+}

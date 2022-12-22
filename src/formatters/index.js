@@ -3,12 +3,15 @@ import setPlainFormat from './plain.js';
 import setJsonFormat from './json.js';
 
 const doFormattingResult = (newObj, style) => {
-  if (style.format === 'stylish') {   
-    return setStylishFormat(newObj);
-  } if (style.format === 'plain') {
-    return setPlainFormat(newObj);
-  } if (style.format === 'json') {
-    return setJsonFormat(newObj);
+  switch(style.format) {
+    case 'stylish':
+      return setStylishFormat(newObj);
+    case 'plain':
+      return setPlainFormat(newObj);
+    case 'json':
+      return setJsonFormat(newObj);
+    default:
+      throw new Error('Unknown style format!');
   }
 };
 

@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "[![Actions Status](https://github.com/Ilya-67/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Ilya-67/frontend-project-46/actions)",
+  "description": "The result of the program is the generation of a file of differences between two files transferred in JSON or YAML(yml) format. The result is output in the following formats: stylish, plain or JSON.",
   "main": "gendiff.js",
   "scripts": {
     "test": "npx jest --coverage --coverageProvider=v8"
@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/Ilya-67/frontend-project-46#readme",
   "dependencies": {
-    "@jest/globals": "^29.3.1",
     "commander": "^9.4.1",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"

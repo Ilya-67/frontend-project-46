@@ -1,78 +1,50 @@
 import { expect, test } from '@jest/globals';
+import fs from 'fs';
 import genDiff from '../src/index.js';
 
 const file1 = '__fixtures__/test1.json';
-const file2 = '__fixtures__/test2.json';
-const file3 = '__fixtures__/test3.json';
-const file4 = '__fixtures__/test11.yml';
-const file5 = '__fixtures__/test21.yml';
-const file6 = '__fixtures__/test31.yml';
+const file2 = '__fixtures__/test3.json';
+const file3 = '__fixtures__/test2.yml';
+const file4 = '__fixtures__/result_JSON.txt'
 const style1 = { format: 'stylish' };
 const style2 = { format: 'plain' };
 const style3 = { format: 'json'};
+const style4 = { format: 'yml'};
 
-const result1 = `{
-    key: value
-    \b\b- key2: 20
-    \b\b+ key2: 10
-    \b\b- key3: value3
-    \b\b- key4: false
-    \b\b+ key4: true
-    \b\b+ key5: value3
-    key7: {
-        \b\b- baz: value1
-        \b\b+ baz: value2
-        foo: bar
-        \b\b+ key1: {
-            key12: value3
-        }
-        \b\b- key2: value4
-    }
-}`;
+const result1 = fs.readFileSync('./__fixtures__/result_stylish1.txt', 'utf8').trimEnd();
 
-const result2 = `{
-    \b\b- key: value
-    \b\b- key2: 20
-    \b\b- key3: value3
-    \b\b- key4: false
-    \b\b- key7: {
-        foo: bar
-        baz: value1
-        key2: value4
-    }
-}`;
+const result2 = fs.readFileSync('./__fixtures__/result_stylish2.txt', 'utf8').trimEnd();
 
-const result3 = 
-`Property 'key2' was updated. From 20 to 10
-Property 'key3' was removed
-Property 'key4' was updated. From false to true
-Property 'key5' was added with value: 'value3'
-Property 'key7.baz' was updated. From 'value1' to 'value2'
-Property 'key7.key1' was added with value: [complex value]
-Property 'key7.key2' was removed`;
+const result3 = fs.readFileSync('./__fixtures__/result_plain.txt', 'utf8').trimEnd();
 
-const result4 = `{"key":"value","- key2":20,"+ key2":10,"- key3":"value3","- key4":false,"+ key4":true,"+ key5":"value3","key7":{"- baz":"value1","+ baz":"value2","foo":"bar","+ key1":{"key12":"value3"},"- key2":"value4"}}`;
+const result4 = fs.readFileSync('./__fixtures__/result_JSON.txt', 'utf8').trimEnd();
 
-test('gendiff JSON', () => {
-  expect(genDiff(file1, file2, style1)).toBe(result1);
+test('gendiff stylish', () => {
+  expect(genDiff(file1, file3, style1)).toEqual(result1);
 });
 
-test('gendiff JSON', () => {
-  expect(genDiff(file1, file3, style1)).toBe(result2);
-});
-
-test('gendiff YAML', () => {
-  expect(genDiff(file4, file5, style1)).toBe(result1);
-});
-
-test('gendiff YAML', () => {
-  expect(genDiff(file4, file6, style1)).toBe(result2);
+test('gendiff with empty', () => {
+  expect(genDiff(file1, file2, style1)).toBe(result2);
 });
 
 test('gendiff plain', () => {
-  expect(genDiff(file4, file5, style2)).toBe(result3);
+  expect(genDiff(file1, file3, style2)).toBe(result3);
 });
 
 test('gendiff json', () => {
-  expect(genDiff(file1, file2, style3)).toBe(result4);
+  expect(genDiff(file1, file3, style3)).toBe(result4);
+});
+
+test('gendiff Error', () => {
+  function gendiffTXT() {
+    genDiff(file1, file2, style4);
+  }
+  expect(gendiffTXT).toThrow(new Error('Unknown style format!'));
+});
+
+test('gendiff Error', () => {
+  function formaterYML() {
+    genDiff(file1, file4, style2);
+  }
+  expect(formaterYML).toThrow(new Error('Unknown file format!'));
 });

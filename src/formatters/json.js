@@ -1,7 +1,3 @@
-const setJsonFormat = (newObj) => {
-  const result = JSON.stringify(newObj);
-  console.log(result);
-  return result;
-}
+const setJsonFormat = (newObj) => JSON.stringify(newObj);
 
 export default setJsonFormat;

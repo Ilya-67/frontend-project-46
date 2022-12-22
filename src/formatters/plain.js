@@ -37,10 +37,7 @@ const setFormatingObj = (newObj, strPath) => {
 };
 
 const setPlainFormat = (newObj) => {
-  const resultArray = setFormatingObj(newObj, '');
-  const resultString = resultArray.join('\n');
-  console.log(resultString);
-  return resultString
+  return setFormatingObj(newObj, '').join('\n');
 }
 
 export default setPlainFormat;
