@@ -8,7 +8,7 @@
 <p>When starting the program, at the user's choice, an absolute or relative path to the location where the analyzed files are stored can be specified.</p>
 <p>The program can be used as a library.</p>
 <h3>Requirement</h3>
-<p>For the package to work correctly, you must install the Node package at least version 16.</p>
+<p>For the package to work correctly, you must install the Node package at least version 16.10.0.</p>
 <p></p>
 <h2>Gendiff example</h2>
 <h3>An example of how the program works when comparing two JSON files. The example introduces relative and absolute paths.</h3>

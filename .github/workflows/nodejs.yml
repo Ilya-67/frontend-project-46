@@ -5,7 +5,7 @@ on:
   - pull_request
 
 env:
- CI: true  
+ CI: true
 
 jobs:
  build:
@@ -16,23 +16,23 @@ jobs:
     matrix:
       node-version: [16.x]
   steps:
-    - uses: 
+    - uses:
         actions/checkout@v3
-    - name: 
+    - name:
         Use Node.js ${{ matrix.node-version }}
-      uses: 
+      uses:
         actions/setup-node@v3
-      with: 
+      with:
         node-version: ${{ matrix.node-version }}
         cashe: "npm"
-    
+
     - run: make install
-    - run: make lint  
+    - run: make lint
     - run: make test
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_ID }}
-      with: 
-        coverageCommand: make test
+      with:
+        #coverageCommand: make test
         debug: true
