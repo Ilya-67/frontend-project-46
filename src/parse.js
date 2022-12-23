@@ -9,7 +9,7 @@ const getParseFile = (formatFile, filepath) => {
     case '.yml':
       return yaml.load(fs.readFileSync(filepath, 'utf8'));
     default:
-      throw new Error('Unknown file format!');
+      throw new Error('Unknown file type!');
   }
 }
 
