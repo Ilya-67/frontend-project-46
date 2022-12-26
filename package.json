@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "The result of the program is the generation of a file of differences between two files transferred in JSON or YAML(yml) format. The result is output in the following formats: stylish, plain or JSON.",
-  "main": "gendiff.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "npx jest --coverage --coverageProvider=v8"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
     "gendiff": "bin/gendiff.js"
