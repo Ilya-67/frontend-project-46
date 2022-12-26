@@ -33,7 +33,9 @@ export const getJoinKey = (obj1, obj2) => {
   return _.sortBy(_.concat(diffKeys1, intersectionKeys, diffKeys2));
 };
 
-const genDiff = (file1, file2, style) => {
+const genDiff = (file1, file2, style = 'stylish') => {
+  const styleAnswer = (_.isObject(style)) ? style.format : style;
+  console.log(10, styleAnswer);
   const formatFile1 = path.extname(file1);
   const pathfile1 = path.resolve(file1);
   const formatFile2 = path.extname(file2);
@@ -44,7 +46,7 @@ const genDiff = (file1, file2, style) => {
   const jointKeys = getJoinKey(obj1, obj2);
   const newObj = getIntersectionObj(jointKeys, obj1, obj2)
   
-  const result = doFormattingResult(newObj, style);
+  const result = doFormattingResult(newObj, styleAnswer);
   console.log(result);
   return result;
 };
