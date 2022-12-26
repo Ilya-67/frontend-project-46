@@ -8,10 +8,10 @@ const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
 const getFixturesPath = (referenceFileName) => path.join(_dirname, '..', '__fixtures__', referenceFileName);
 
-const style1 = { format: 'stylish' };
-const style2 = { format: 'plain' };
-const style3 = { format: 'json'};
-const style4 = { format: 'yml'};
+const style1 = 'stylish';
+const style2 = 'plain';
+const style3 = 'json';
+const style4 = 'yml';
 
 const file1 = getFixturesPath('test1.json');
 const file2 = getFixturesPath('test3.json');

@@ -3,7 +3,6 @@ import setPlainFormat from './plain.js';
 import setJsonFormat from './json.js';
 
 const doFormattingResult = (newObj, style) => {
-  console.log(11, style);
   switch(style) {
     case 'stylish':
       return setStylishFormat(newObj);
