@@ -19,15 +19,17 @@ export const getIntersectionObj = (keys, obj1, obj2) => {
       const childrenObj1 = obj1[key];
       const childrenObj2 = obj2[key];
       const childrenKey = getJoinKey(childrenObj1, childrenObj2);
-      newObj[`${key}`] = getIntersectionObj(childrenKey, childrenObj1, childrenObj2);
+      newObj[key] = getIntersectionObj(childrenKey, childrenObj1, childrenObj2);
       return JSON.stringify(newObj);
     }
     if (obj1[key] === obj2[key]) {
-      newObj[`${key}`] = obj1[key];
+      newObj[key] = obj1[key];
       return newObj;
     }
-    newObj[`- ${key}`] = obj1[key];
-    newObj[`+ ${key}`] = obj2[key];
+    const key1 = `- ${key}`;
+    const key2 = `+ ${key}`;
+    newObj[key1] = obj1[key];
+    newObj[key2] = obj2[key];
     return newObj;
   });
   return newObj;

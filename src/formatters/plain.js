@@ -13,6 +13,7 @@ const setFormatResultItem = (notchValue, insertValue, propertyObj) => {
   if (notchValue === undefined) return `Property '${propertyObj}' was added with value: ${insertValue}`;
   if (insertValue === undefined) return `Property '${propertyObj}' was removed`;
   if (notchValue !== undefined && insertValue !== undefined) return `Property '${propertyObj}' was updated. From ${notchValue} to ${insertValue}`;
+  return;
 };
 
 const setFormatingObj = (newObj, strPath) => {
@@ -28,6 +29,7 @@ const setFormatingObj = (newObj, strPath) => {
     } if (_.isObject(value)) {
       return (setFormatingObj(value, `${strPath}${key}.`));
     }
+    return;
   });
   return _.compact(resultArray);
 };
