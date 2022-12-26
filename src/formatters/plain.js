@@ -1,22 +1,18 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 const getUpdateValue = (value) => {
   if (_.isObject(value)) {
     return '[complex value]';
-  } if (typeof(value) === 'string') {
+  } if (typeof (value) === 'string') {
     return `'${value}'`;
   }
   return value;
 };
 
 const setFormatResultItem = (notchValue, insertValue, propertyObj) => {
-  if (notchValue === undefined) {
-    return `Property '${propertyObj}' was added with value: ${insertValue}`;
-  } if (insertValue === undefined) {
-    return`Property '${propertyObj}' was removed`;
-  } if (notchValue !== undefined && insertValue !== undefined) {
-    return`Property '${propertyObj}' was updated. From ${notchValue} to ${insertValue}`;
-  }
+  if (notchValue === undefined) return `Property '${propertyObj}' was added with value: ${insertValue}`;
+  if (insertValue === undefined) return `Property '${propertyObj}' was removed`;
+  if (notchValue !== undefined && insertValue !== undefined) return `Property '${propertyObj}' was updated. From ${notchValue} to ${insertValue}`;
 };
 
 const setFormatingObj = (newObj, strPath) => {
@@ -31,13 +27,11 @@ const setFormatingObj = (newObj, strPath) => {
       return setFormatResultItem(notchValue, insertValue, propertyObj);
     } if (_.isObject(value)) {
       return (setFormatingObj(value, `${strPath}${key}.`));
-    } 
-  });  
+    }
+  });
   return _.compact(resultArray);
 };
 
-const setPlainFormat = (newObj) => {
-  return setFormatingObj(newObj, '').join('\n');
-}
+const setPlainFormat = (newObj) => setFormatingObj(newObj, '').join('\n');
 
 export default setPlainFormat;

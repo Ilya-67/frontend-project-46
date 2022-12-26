@@ -4,12 +4,13 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import genDiff from '../src/index.js';
 
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = dirname(_filename);
-const getFixturesPath = (referenceFileName) => path.join(_dirname, '..', '__fixtures__', referenceFileName);
+const filename = fileURLToPath(import.meta.url);
+const dirname1 = dirname(filename);
+const getFixturesPath = (referenceFileName) => path.join(dirname1, '..', '__fixtures__', referenceFileName);
 
 const style1 = 'stylish';
 const style2 = 'plain';
+const style11 = { format: 'stylish' };
 const style3 = 'json';
 const style4 = 'yml';
 
@@ -31,7 +32,7 @@ test('gendiff stylish', () => {
 });
 
 test('gendiff with empty file', () => {
-  expect(genDiff(file1, file2, style1)).toBe(result2);
+  expect(genDiff(file1, file2, style11)).toBe(result2);
 });
 
 test('gendiff plain', () => {

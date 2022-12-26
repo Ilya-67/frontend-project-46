@@ -1,7 +1,16 @@
+import _ from 'lodash';
+import path from 'path';
 import getParseFile from './parse.js';
 import doFormattingResult from './formatters/index.js';
-import path from 'path';
-import _ from 'lodash';
+
+export const getJoinKey = (obj1, obj2) => {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+  const diffKeys1 = _.difference(keys1, keys2);
+  const intersectionKeys = _.intersection(keys1, keys2);
+  const diffKeys2 = _.difference(keys2, keys1);
+  return _.sortBy(_.concat(diffKeys1, intersectionKeys, diffKeys2));
+};
 
 export const getIntersectionObj = (keys, obj1, obj2) => {
   const newObj = {};
@@ -22,15 +31,6 @@ export const getIntersectionObj = (keys, obj1, obj2) => {
     return newObj;
   });
   return newObj;
-};
-
-export const getJoinKey = (obj1, obj2) => {
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
-  const diffKeys1 = _.difference(keys1, keys2);
-  const intersectionKeys = _.intersection(keys1, keys2);
-  const diffKeys2 = _.difference(keys2, keys1);
-  return _.sortBy(_.concat(diffKeys1, intersectionKeys, diffKeys2));
 };
 
 const genDiff = (file1, file2, style = 'stylish') => {

@@ -1,9 +1,8 @@
 import fs from 'fs';
 import yaml from 'js-yaml';
-import _ from 'lodash';
 
 const getParseFile = (formatFile, filepath) => {
-  switch(formatFile) {
+  switch (formatFile) {
     case '.json':
       return JSON.parse(fs.readFileSync(filepath, 'utf8'));
     case '.yml':
@@ -11,6 +10,6 @@ const getParseFile = (formatFile, filepath) => {
     default:
       throw new Error('Unknown file type!');
   }
-}
+};
 
 export default getParseFile;
