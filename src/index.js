@@ -18,18 +18,14 @@ export const getIntersectionObj = (keys, obj1, obj2) => {
       const childrenObj1 = obj1[key];
       const childrenObj2 = obj2[key];
       const childrenKey = getJoinKey(childrenObj1, childrenObj2);
-      const newValue = getIntersectionObj(childrenKey, childrenObj1, childrenObj2);
-      return [[key, newValue]];
+      return [[key, getIntersectionObj(childrenKey, childrenObj1, childrenObj2)]];
     }
     if (obj1[key] === obj2[key]) {
       return [[key, obj1[key]]];
     }
-    const key1 = `- ${key}`;
-    const key2 = `+ ${key}`;
-    return [[key1, obj1[key]], [key2, obj2[key]]];
+    return [[`- ${key}`, obj1[key]], [`+ ${key}`, obj2[key]]];
   });
-  const newObj = Object.fromEntries(result);
-  return newObj;
+  return Object.fromEntries(result);
 };
 
 const genDiff = (file1, file2, style = 'stylish') => {
