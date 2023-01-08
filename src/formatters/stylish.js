@@ -5,6 +5,7 @@ const valueConversion = (data, replacer, stepSpace, count) => {
     const newData = Object.entries(data);
     const backSpace = count;
     const countSpace = count + stepSpace;
+    console.log(10, data, replacer, stepSpace, count);
     const result = newData.flatMap((item) => {
       const key = item[0];
       const value = item[1];
@@ -33,7 +34,7 @@ const stringFy = (data, replacer = ' ', stepSpace = 4, count = 0) => {
       case 'deleted': return `- ${key}: ${value1}`;
       case 'unchanged': return `${key}: ${value1}`;
       case 'changed': {
-        const value2 = valueConversion(item[1][2], stepSpace, countSpace);
+        const value2 = valueConversion(item[1][2], replacer, stepSpace, countSpace);
         return `- ${key}: ${value1},+ ${key}: ${value2}`;
       }
       default:
