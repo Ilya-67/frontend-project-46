@@ -9,27 +9,25 @@ const getUpdateValue = (value) => {
   return value;
 };
 
-const setFormatResultItem = (notchValue, insertValue, propertyObj) => {
-  if (notchValue === undefined) return `Property '${propertyObj}' was added with value: ${insertValue}`;
-  if (insertValue === undefined) return `Property '${propertyObj}' was removed`;
-  if (notchValue !== undefined && insertValue !== undefined) return `Property '${propertyObj}' was updated. From ${notchValue} to ${insertValue}`;
-  return undefined;
-};
-
-const setFormatingObj = (newObj, strPath) => {
-  const workingArray = Object.entries(newObj);
-  const resultArray = workingArray.flatMap((item, index) => {
-    const key = item[0];
-    const value = item[1];
-    if (key.startsWith('-')) {
-      const propertyObj = `${strPath}${key.slice(2)}`;
-      const notchValue = getUpdateValue(value);
-      const insertValue = getUpdateValue(workingArray[index + 1][1]);
-      return setFormatResultItem(notchValue, insertValue, propertyObj);
-    } if (_.isObject(value)) {
-      return setFormatingObj(value, `${strPath}${key}.`);
+const setFormatingObj = (diffTree, strPath) => {
+  const resultArray = diffTree.flatMap((item) => {
+    const key = item[1][0];
+    const value = getUpdateValue(item[1][1]);
+    const property = `${strPath}${key}`;
+    switch (item[0]) {
+      case 'changed': {
+        const value2 = getUpdateValue(item[1][2]);
+        return `Property '${property}' was updated. From ${value} to ${value2}`;
+      } 
+      case 'nested': {
+        const newProperty = property + ".";
+        return setFormatingObj(item[1][1], newProperty);
+      } 
+      case 'deleted': return `Property '${property}' was removed`;
+      case 'added': return `Property '${property}' was added with value: ${value}`;
+      case 'unchanged': return undefined;
+      default: throw new Error(`${item[0]} unknown action status!`);
     }
-    return undefined;
   });
   return _.compact(resultArray);
 };

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import path from 'path';
 import getParseFile from './parse.js';
-import doFormattingResult from './formatters/index.js';
+import formatResult from './formatters/index.js';
 
 export const getJoinKey = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
@@ -12,35 +12,37 @@ export const getJoinKey = (obj1, obj2) => {
   return _.sortBy(_.concat(diffKeys1, intersectionKeys, diffKeys2));
 };
 
-export const getIntersectionObj = (keys, obj1, obj2) => {
-  const result = keys.flatMap((key) => {
+export const getDiffTree = (keys, obj1, obj2) => {
+  const diffTree = keys.map((key) => {
     if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
       const childrenObj1 = obj1[key];
       const childrenObj2 = obj2[key];
       const childrenKey = getJoinKey(childrenObj1, childrenObj2);
-      return [[key, getIntersectionObj(childrenKey, childrenObj1, childrenObj2)]];
+      return ['nested', [key, getDiffTree(childrenKey, childrenObj1, childrenObj2)]];
+    } if (obj1[key] === obj2[key]) {
+      return ['unchanged', [key, obj1[key]]];
+    } if (_.isUndefined(obj1[key])) {
+      return ['added', [key, obj2[key]]];
+    } if (_.isUndefined(obj2[key])) {
+      return ['deleted', [key, obj1[key]]];
     }
-    if (obj1[key] === obj2[key]) {
-      return [[key, obj1[key]]];
-    }
-    return [[`- ${key}`, obj1[key]], [`+ ${key}`, obj2[key]]];
+    return ['changed', [key, obj1[key], obj2[key]]];
   });
-  return Object.fromEntries(result);
+  return diffTree;
 };
 
 const genDiff = (file1, file2, style = 'stylish') => {
   const styleAnswer = (_.isObject(style)) ? style.format : style;
-  const formatFile1 = path.extname(file1);
+  const formatFile1 = path.extname(file1).slice(1);
   const pathfile1 = path.resolve(file1);
-  const formatFile2 = path.extname(file2);
+  const formatFile2 = path.extname(file2).slice(1);
   const pathfile2 = path.resolve(file2);
-
+  
   const obj1 = getParseFile(formatFile1, pathfile1);
   const obj2 = getParseFile(formatFile2, pathfile2);
   const jointKeys = getJoinKey(obj1, obj2);
-  const newObj = getIntersectionObj(jointKeys, obj1, obj2);
-
-  const result = doFormattingResult(newObj, styleAnswer);
+  const diffTree = getDiffTree(jointKeys, obj1, obj2);
+  const result = formatResult(diffTree, styleAnswer);
   console.log(result);
   return result;
 };

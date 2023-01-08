@@ -2,17 +2,17 @@ import setStylishFormat from './stylish.js';
 import setPlainFormat from './plain.js';
 import setJsonFormat from './json.js';
 
-const doFormattingResult = (newObj, style) => {
+const formatResult = (diffTree, style) => {
   switch (style) {
     case 'stylish':
-      return setStylishFormat(newObj);
+      return setStylishFormat(diffTree);
     case 'plain':
-      return setPlainFormat(newObj);
+      return setPlainFormat(diffTree);
     case 'json':
-      return setJsonFormat(newObj);
+      return setJsonFormat(diffTree);
     default:
-      throw new Error('Unknown style format!');
+      throw new Error(`${style} unknown style format!`);
   }
 };
 
-export default doFormattingResult;
+export default formatResult;
