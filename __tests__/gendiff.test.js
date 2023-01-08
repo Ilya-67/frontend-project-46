@@ -6,8 +6,6 @@ import setJsonFormat from '../src/formatters/json.js';
 import setStylishFormat from '../src/formatters/stylish.js';
 import setPlainFormat from '../src/formatters/plain.js';
 
-
-
 const filename = fileURLToPath(import.meta.url);
 const dirname1 = dirname(filename);
 const getFixturesPath = (referenceFileName) => path.join(dirname1, '..', '__fixtures__', referenceFileName);
