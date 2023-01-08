@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 const valueConversion = (data, replacer, stepSpace, count) => {
   if (_.isObject(data)) {
@@ -27,7 +27,7 @@ const stringFy = (data, replacer = ' ', stepSpace = 4, count = 0) => {
     const key = item[1][0];
     const value = item[1][1];
     const value1 = valueConversion(value, replacer, stepSpace, countSpace);
-    switch (item[0]) {
+    switch (differenceKey) {
       case 'nested': return `${key}: ${stringFy(value, replacer, stepSpace, countSpace)}`;
       case 'added': return `+ ${key}: ${value1}`;
       case 'deleted': return `- ${key}: ${value1}`;
@@ -37,13 +37,13 @@ const stringFy = (data, replacer = ' ', stepSpace = 4, count = 0) => {
         return `- ${key}: ${value1},+ ${key}: ${value2}`;
       }
       default:
-        throw new Error(`${item[0]} unknown action status!`);
-    } 
-  }); 
+        throw new Error(`${differenceKey} unknown action status!`);
+    }
+  });
   return `{\n${replacer.repeat(countSpace)}${resultArr.join()
     .replaceAll(',', `\n${replacer.repeat(countSpace)}`)}\n${replacer.repeat(backSpace)}}`;
 };
 
-const setStylishFormat = (diffTree) =>  stringFy(diffTree).replaceAll('  -', '-').replaceAll('  +', '+');
+const setStylishFormat = (diffTree) => stringFy(diffTree).replaceAll('  -', '-').replaceAll('  +', '+');
 
 export default setStylishFormat;

@@ -37,7 +37,7 @@ const genDiff = (file1, file2, style = 'stylish') => {
   const pathfile1 = path.resolve(file1);
   const formatFile2 = path.extname(file2).slice(1);
   const pathfile2 = path.resolve(file2);
-  
+
   const obj1 = getParseFile(formatFile1, pathfile1);
   const obj2 = getParseFile(formatFile2, pathfile2);
   const jointKeys = getJoinKey(obj1, obj2);

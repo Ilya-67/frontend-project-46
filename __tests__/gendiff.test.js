@@ -23,12 +23,12 @@ const file2 = getFixturesPath('test3.yaml');
 const file3 = getFixturesPath('test2.yml');
 const file4 = getFixturesPath('result_JSON.txt');
 const diffTree = [
-  [ 'unchanged', [ 'key', 'value' ] ],
-  [ 'rewritten', [ 'key2', 20, 10 ] ],
-  [ 'deleted', [ 'key3', 'value3' ] ],
-  [ 'changed', [ 'key4', false, true ] ],
-  [ 'added', [ 'key5', 'value3' ] ],
-  [ 'nested', [ 'key7', 'value7' ] ]
+  ['unchanged', ['key', 'value']],
+  ['rewritten', ['key2', 20, 10]],
+  ['deleted', ['key3', 'value3']],
+  ['changed', ['key4', false, true]],
+  ['added', ['key5', 'value3']],
+  ['nested', ['key7', 'value7']],
 ];
 
 const result1 = fs.readFileSync(getFixturesPath('result_stylish1.txt'), 'utf8').trimEnd();
