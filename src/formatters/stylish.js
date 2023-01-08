@@ -5,7 +5,6 @@ const valueConversion = (data, replacer, stepSpace, count) => {
     const newData = Object.entries(data);
     const backSpace = count;
     const countSpace = count + stepSpace;
-    console.log(10, data, replacer, stepSpace, count);
     const result = newData.flatMap((item) => {
       const key = item[0];
       const value = item[1];
