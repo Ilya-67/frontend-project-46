@@ -6,7 +6,7 @@ const getDiffTree = (obj1, obj2) => {
   const keys = getJoinKey(obj1, obj2);
   const diffTree = keys.map((key) => {
     const value1 = obj1[key];
-    const  value2 = obj2[key];
+    const value2 = obj2[key];
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return ['nested', [key, getDiffTree(value1, value2)]];
     } if (value1 === value2) {
