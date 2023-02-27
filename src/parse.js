@@ -1,17 +1,16 @@
-import fs from 'fs';
 import yaml from 'js-yaml';
 
-const getParseFile = (formatFile, filepath) => {
+const parse = (formatFile, file) => {
   switch (formatFile) {
     case 'json':
-      return JSON.parse(fs.readFileSync(filepath, 'utf8'));
+      return JSON.parse(file);
     case 'yml':
-      return yaml.load(fs.readFileSync(filepath, 'utf8'));
+      return yaml.load(file);
     case 'yaml':
-      return yaml.load(fs.readFileSync(filepath, 'utf8'));
+      return yaml.load(file);
     default:
       throw new Error(`${formatFile} unknown file type!`);
   }
 };
 
-export default getParseFile;
+export default parse;
