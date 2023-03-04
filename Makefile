@@ -6,5 +6,5 @@ publish:
 		npm publish --dry-run
 lint:
 		npx eslint		
-test:
+test coverage:
 		 npx jest --coverage --coverageProvider=v8

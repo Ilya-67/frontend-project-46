@@ -1,18 +1,44 @@
 {
-  "key": "value",
-  "- key2": 20,
-  "+ key2": 10,
-  "- key3": "value3",
-  "- key4": false,
-  "+ key4": true,
-  "+ key5": "value3",
-  "key7": {
-    "- baz": "value1",
-    "+ baz": "value2",
-    "foo": "bar",
-    "+ key1": {
-      "key12": "value3"
+  "common": {
+    "+ follow": false,
+    "setting1": "Value 1",
+    "- setting2": 200,
+    "- setting3": true,
+    "+ setting3": null,
+    "+ setting4": "blah blah",
+    "+ setting5": {
+      "key5": "value5"
     },
-    "- key2": "value4"
+    "setting6": {
+      "doge": {
+        "- wow": "",
+        "+ wow": "so much"
+      },
+      "key": "value",
+      "+ ops": "vops"
+    }
+  },
+  "group1": {
+    "- baz": "bas",
+    "+ baz": "bars",
+    "foo": "bar",
+    "- nest": {
+      "key": "value"
+    },
+    "+ nest": "str"
+  },
+  "- group2": {
+    "abc": 12345,
+    "deep": {
+      "id": 45
+    }
+  },
+  "+ group3": {
+    "deep": {
+      "id": {
+        "number": 45
+      }
+    },
+    "fee": 100500
   }
 }

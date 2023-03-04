@@ -10,7 +10,17 @@
 <h3>Requirement</h3>
 <p>For the package to work correctly, you must install the Node package at least version 16.10.0.</p>
 <p></p>
-<h2>Gendiff example</h2>
+<h3>Instructions for installing the package.</h3>
+<p>To install the package, you need to clone the repository on your computer:</p>
+<p>git clone http://git@github.com:Ilya-67/frontend-project-46.git</p>
+<p>Run the following commands in the project root directory:</p>
+<ul>
+  <li>npm link</li>
+  <li>npm ci</li>
+  <li>make install</li>
+</ul>
+<p></p>
+<h3>Gendiff example</h3>
 <h3>An example of how the program works when comparing two JSON files. The example introduces relative and absolute paths.</h3>
 <a href="https://asciinema.org/a/Va2GJdCoDnq58talb62r2XAdO" target="_blank"><img src="https://asciinema.org/a/Va2GJdCoDnq58talb62r2XAdO.svg" /></a>
 <p></p>
