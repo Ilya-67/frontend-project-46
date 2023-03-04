@@ -9,20 +9,22 @@ const getFilePath = (referenceFileName) => path.join(dirname1, '..', '__fixtures
 
 describe.each([
   {
-    a: 'file1.json', b: 'file2.yml', style: undefined, expected: 'result_stylish.txt'
-  }, 
-  { 
-    a: 'file1.json', b: 'file3.yaml', style: 'stylish', expected: 'result_with_empty_file.txt'
+    a: 'file1.json', b: 'file2.yml', style: undefined, expected: 'result_stylish.txt',
   },
   {
-    a: 'file1.json', b: 'file2.yml', style: 'plain', expected: 'result_plain.txt'
+    a: 'file1.json', b: 'file3.yaml', style: 'stylish', expected: 'result_with_empty_file.txt',
   },
   {
-    a: 'file1.json', b: 'file2.yml', style: 'json', expected: 'result_JSON.txt'
+    a: 'file1.json', b: 'file2.yml', style: 'plain', expected: 'result_plain.txt',
+  },
+  {
+    a: 'file1.json', b: 'file2.yml', style: 'json', expected: 'result_JSON.txt',
   },
 ])('test', (
-  { a, b, style, expected }
-  ) => {
+  {
+    a, b, style, expected,
+  }
+) => {
   test('gendiff', () => {
     const file1 = getFilePath(a);
     const file2 = getFilePath(b);
