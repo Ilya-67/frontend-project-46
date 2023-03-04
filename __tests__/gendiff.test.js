@@ -23,7 +23,7 @@ describe.each([
 ])('test', (
   {
     a, b, style, expected,
-  }
+  },
 ) => {
   test('gendiff', () => {
     const file1 = getFilePath(a);
