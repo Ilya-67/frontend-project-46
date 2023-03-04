@@ -7,7 +7,7 @@ const getDiffTree = (obj1, obj2) => {
     const value2 = obj2[key];
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return ['nested', [key, getDiffTree(value1, value2)]];
-    } if (_.isEqual(value1, value2) === true ) {
+    } if (_.isEqual(value1, value2) === true) {
       return ['unchanged', [key, value1]];
     } if (_.has(obj1, key) === false) {
       return ['added', [key, value2]];
