@@ -9,11 +9,11 @@ const getFilePath = (referenceFileName) => path.join(dirname1, '..', '__fixtures
 
 describe.each([['stylish'], ['plain'], ['json']])('%s fomatter', (fomatter) => {
   const expected = fs.readFileSync(getFilePath(`${fomatter}.txt`), 'utf8').trimEnd();
-  
+
   test.each([['json'], ['yml']])('%s files', (extension) => {
     const filepath1 = getFilePath(`file1.${extension}`);
     const filepath2 = getFilePath(`file2.${extension}`);
-    
+  
     expect(genDiff(filepath1, filepath2, fomatter)).toBe(expected);
   });
 });
