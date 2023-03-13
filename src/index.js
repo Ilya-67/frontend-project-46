@@ -4,14 +4,14 @@ import parse from './parse.js';
 import getDiffTree from './diffTree.js';
 import formatResult from './formatters/index.js';
 
-const extnameFile = (file) => path.extname(file).slice(1);
+const getExtname = (filepath) => path.extname(filepath).slice(1);
 
-const contentFile = (file) => fs.readFileSync(path.resolve(file), 'utf8');
+const getContent = (filepath) => fs.readFileSync(path.resolve(filepath), 'utf8');
 
-const genDiff = (file1, file2, style = 'stylish') => {
-  const obj1 = parse(extnameFile(file1), contentFile(file1));
-  const obj2 = parse(extnameFile(file2), contentFile(file2));
-  const diffTree = getDiffTree(obj1, obj2);
+const genDiff = (filepath1, filepath2, style = 'stylish') => {
+  const data1 = parse(getExtname(filepath1), getContent(filepath1));
+  const data2 = parse(getExtname(filepath2), getContent(filepath2));
+  const diffTree = getDiffTree(data1, data2);
   return formatResult(diffTree, style);
 };
 

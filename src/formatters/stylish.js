@@ -6,8 +6,7 @@ const valueConversion = (data, replacer, stepSpace, count) => {
     const backSpace = count;
     const countSpace = count + stepSpace;
     const result = newData.flatMap((item) => {
-      const key = item[0];
-      const value = item[1];
+      const [key, value] = item;
       if (typeof (value) === 'object' && value !== null) {
         return `${key}: ${valueConversion(value, replacer, stepSpace, countSpace)}`;
       }
@@ -23,18 +22,16 @@ const stringFy = (data, replacer = ' ', stepSpace = 4, count = 0) => {
   const backSpace = count;
   const countSpace = count + stepSpace;
   const resultArr = data.flatMap((item) => {
-    const differenceKey = item[0];
-    const key = item[1][0];
-    const value = item[1][1];
-    const value1 = valueConversion(value, replacer, stepSpace, countSpace);
+    const [differenceKey, [key, value1, value2]] = item;
+    const updateValue1 = valueConversion(value1, replacer, stepSpace, countSpace);
     switch (differenceKey) {
-      case 'nested': return `${key}: ${stringFy(value, replacer, stepSpace, countSpace)}`;
-      case 'added': return `+ ${key}: ${value1}`;
-      case 'deleted': return `- ${key}: ${value1}`;
-      case 'unchanged': return `${key}: ${value1}`;
+      case 'nested': return `${key}: ${stringFy(value1, replacer, stepSpace, countSpace)}`;
+      case 'added': return `+ ${key}: ${updateValue1}`;
+      case 'deleted': return `- ${key}: ${updateValue1}`;
+      case 'unchanged': return `${key}: ${updateValue1}`;
       case 'changed': {
-        const value2 = valueConversion(item[1][2], replacer, stepSpace, countSpace);
-        return `- ${key}: ${value1},+ ${key}: ${value2}`;
+        const updateValue2 = valueConversion(value2, replacer, stepSpace, countSpace);
+        return `- ${key}: ${updateValue1},+ ${key}: ${updateValue2}`;
       }
       default:
         throw new Error(`${differenceKey} unknown action status!`);
@@ -44,6 +41,6 @@ const stringFy = (data, replacer = ' ', stepSpace = 4, count = 0) => {
     .replaceAll(',', `\n${replacer.repeat(countSpace)}`)}\n${replacer.repeat(backSpace)}}`;
 };
 
-const setStylishFormat = (diffTree) => stringFy(diffTree).replaceAll('  -', '-').replaceAll('  +', '+');
+const formatStylish = (diffTree) => stringFy(diffTree).replaceAll('  -', '-').replaceAll('  +', '+');
 
-export default setStylishFormat;
+export default formatStylish;

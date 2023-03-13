@@ -7,28 +7,13 @@ const filename = fileURLToPath(import.meta.url);
 const dirname1 = dirname(filename);
 const getFilePath = (referenceFileName) => path.join(dirname1, '..', '__fixtures__', referenceFileName);
 
-describe.each([
-  {
-    a: 'file1.json', b: 'file2.yml', style: undefined, expected: 'result_stylish.txt',
-  },
-  {
-    a: 'file1.json', b: 'file3.yaml', style: 'stylish', expected: 'result_with_empty_file.txt',
-  },
-  {
-    a: 'file1.json', b: 'file2.yml', style: 'plain', expected: 'result_plain.txt',
-  },
-  {
-    a: 'file1.json', b: 'file2.yml', style: 'json', expected: 'result_JSON.txt',
-  },
-])('test', (
-  {
-    a, b, style, expected,
-  },
-) => {
-  test('gendiff', () => {
-    const file1 = getFilePath(a);
-    const file2 = getFilePath(b);
-    const result = fs.readFileSync(getFilePath(expected), 'utf8').trimEnd();
-    expect(genDiff(file1, file2, style)).toBe(result);
+describe.each([['stylish'], ['plain'], ['json']])('%s fomatter', (fomatter) => {
+  const expected = fs.readFileSync(getFilePath(`${fomatter}.txt`), 'utf8').trimEnd();
+  
+  test.each([['json'], ['yml']])('%s files', (extension) => {
+    const filepath1 = getFilePath(`file1.${extension}`);
+    const filepath2 = getFilePath(`file2.${extension}`);
+    
+    expect(genDiff(filepath1, filepath2, fomatter)).toBe(expected);
   });
 });

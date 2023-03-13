@@ -1,14 +1,11 @@
-const setResultObject = (diffTree) => {
+const getResultObject = (diffTree) => {
   const resultArr = diffTree.flatMap((item) => {
-    const differenceKey = item[0];
-    const key = item[1][0];
-    const value1 = item[1][1];
+    const [differenceKey, [key, value1, value2]] = item;
     switch (differenceKey) {
       case 'unchanged': {
         return [item[1]];
       }
       case 'changed': {
-        const value2 = item[1][2];
         return [[`- ${key}`, value1], [`+ ${key}`, value2]];
       }
       case 'deleted': {
@@ -18,7 +15,7 @@ const setResultObject = (diffTree) => {
         return [[`+ ${key}`, value1]];
       }
       case 'nested': {
-        return [[key, setResultObject(value1)]];
+        return [[key, getResultObject(value1)]];
       }
       default: throw new Error(`${differenceKey} unknown action status!`);
     }
@@ -26,6 +23,6 @@ const setResultObject = (diffTree) => {
   return Object.fromEntries(resultArr);
 };
 
-const setJsonFormat = (diffTree) => JSON.stringify(setResultObject(diffTree), 0, 2);
+const formatJson = (diffTree) => JSON.stringify(getResultObject(diffTree), 0, 2);
 
-export default setJsonFormat;
+export default formatJson;

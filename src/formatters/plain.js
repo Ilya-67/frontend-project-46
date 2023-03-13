@@ -9,30 +9,27 @@ const getUpdateValue = (value) => {
   return value;
 };
 
-const setFormatingObj = (diffTree, strPath) => {
+const formatPlain = (diffTree, strPath = '') => {
   const resultArray = diffTree.flatMap((item) => {
-    const differenceKey = item[0];
-    const key = item[1][0];
-    const value = getUpdateValue(item[1][1]);
+    const [differenceKey, [key, value1, value2]] = item;
+    const updateValue1 = getUpdateValue(value1);
     const property = `${strPath}${key}`;
     switch (differenceKey) {
       case 'changed': {
-        const value2 = getUpdateValue(item[1][2]);
-        return `Property '${property}' was updated. From ${value} to ${value2}`;
+        const updateValue2 = getUpdateValue(value2);
+        return `Property '${property}' was updated. From ${updateValue1} to ${updateValue2}`;
       }
       case 'nested': {
         const newProperty = `${property}.`;
-        return setFormatingObj(item[1][1], newProperty);
+        return formatPlain(value1, newProperty);
       }
       case 'deleted': return `Property '${property}' was removed`;
-      case 'added': return `Property '${property}' was added with value: ${value}`;
+      case 'added': return `Property '${property}' was added with value: ${updateValue1}`;
       case 'unchanged': return undefined;
       default: throw new Error(`${differenceKey} unknown action status!`);
     }
   });
-  return _.compact(resultArray);
+  return _.compact(resultArray).join('\n');
 };
 
-const setPlainFormat = (newObj) => setFormatingObj(newObj, '').join('\n');
-
-export default setPlainFormat;
+export default formatPlain;

@@ -1,15 +1,15 @@
-import setStylishFormat from './stylish.js';
-import setPlainFormat from './plain.js';
-import setJsonFormat from './json.js';
+import formatStylish from './stylish.js';
+import formatPlain from './plain.js';
+import formatJson from './json.js';
 
 const formatResult = (diffTree, style) => {
   switch (style) {
     case 'stylish':
-      return setStylishFormat(diffTree);
+      return formatStylish(diffTree);
     case 'plain':
-      return setPlainFormat(diffTree);
+      return formatPlain(diffTree);
     case 'json':
-      return setJsonFormat(diffTree);
+      return formatJson(diffTree);
     default:
       throw new Error(`${style} unknown style format!`);
   }
