@@ -13,7 +13,7 @@ describe.each([['stylish'], ['plain'], ['json']])('%s fomatter', (fomatter) => {
   test.each([['json'], ['yml']])('%s files', (extension) => {
     const filepath1 = getFilePath(`file1.${extension}`);
     const filepath2 = getFilePath(`file2.${extension}`);
-  
+
     expect(genDiff(filepath1, filepath2, fomatter)).toBe(expected);
   });
 });
